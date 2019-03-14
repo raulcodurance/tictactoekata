@@ -1,21 +1,35 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class TicTacToe {
-    private Map<BoardPosition, BoardSymbol> board = new HashMap<>();
+    private Board board = new Board();
+    public Message move(BoardPosition position, BoardSymbol symbol) {
 
-    public Message move(BoardPosition position, BoardSymbol symbolX) {
+        board.addSymbol(position, symbol);
 
-        if (board.containsKey(position)) {
-            return Message.POSITION_TAKEN;
+        if (board.containsSymbolAtPosition(new BoardPosition(0, 0), symbol)
+                && board.containsSymbolAtPosition(new BoardPosition(0, 1), symbol)
+                && board.containsSymbolAtPosition(new BoardPosition(0, 2), symbol)) {
+
+            return symbol.equals(new BoardSymbol("X")) ? Message.X_WINS : Message.O_WINS;
         }
-        board.put(position, symbolX);
 
-        if (symbolX.equals(board.get(new BoardPosition(0, 0)))
-                && symbolX.equals(board.get(new BoardPosition(0, 1)))
-                && symbolX.equals(board.get(new BoardPosition(0, 2)))) {
+        if (board.containsSymbolAtPosition(new BoardPosition(0, 0), symbol)
+                && board.containsSymbolAtPosition(new BoardPosition(1, 0), symbol)
+                && board.containsSymbolAtPosition(new BoardPosition(2, 0), symbol)) {
 
-            return symbolX.equals(new BoardSymbol("X")) ? Message.X_WINS : Message.O_WINS;
+            return symbol.equals(new BoardSymbol("X")) ? Message.X_WINS : Message.O_WINS;
+        }
+
+        if (board.containsSymbolAtPosition(new BoardPosition(0, 0), symbol)
+                && board.containsSymbolAtPosition(new BoardPosition(1, 1), symbol)
+                && board.containsSymbolAtPosition(new BoardPosition(2, 2), symbol)) {
+
+            return symbol.equals(new BoardSymbol("X")) ? Message.X_WINS : Message.O_WINS;
+        }
+
+        if (board.containsSymbolAtPosition(new BoardPosition(2, 0), symbol)
+                && board.containsSymbolAtPosition(new BoardPosition(1, 1), symbol)
+                && board.containsSymbolAtPosition(new BoardPosition(0, 2), symbol)) {
+
+            return symbol.equals(new BoardSymbol("X")) ? Message.X_WINS : Message.O_WINS;
         }
 
         return Message.X_WINS;
