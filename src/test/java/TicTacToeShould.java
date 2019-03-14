@@ -20,4 +20,12 @@ public class TicTacToeShould {
         TicTacToe ticTacToe = new TicTacToe();
         assertThat(ticTacToe.boardSize(), is(9));
     }
+
+    @Test
+    public void
+    have_as_a_first_move_an_X() {
+
+        TicTacToe ticTacToe = new TicTacToe();
+        assertThat(ticTacToe.game("X"), is("X"));
+    }
 }

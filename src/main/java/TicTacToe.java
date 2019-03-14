@@ -1,11 +1,18 @@
 public final class TicTacToe {
 
 
+    private String[][] board;
+
     public String[][] board() {
-        return new String[0][];
+        board = new String[0][];
+        return board;
     }
 
     public int boardSize() {
-        return 0;
+        return 9;
+    }
+
+    public String game(String inputFromPlayer) {
+        return null;
     }
 }
