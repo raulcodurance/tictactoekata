@@ -8,24 +8,51 @@ public class TicTacToeShould {
 
     @Test
     public void
-    have_a_game_board_initialized() {
+    return_X_wins_for_three_X_in_a_row_single_player() {
 
         TicTacToe ticTacToe = new TicTacToe();
-        assertNotNull(ticTacToe.board());
+        BoardSymbol symbolX = new BoardSymbol("X");
+
+        ticTacToe.move(new BoardPosition(0,0), symbolX);
+        ticTacToe.move(new BoardPosition(0,1), symbolX);
+        Message message = ticTacToe.move(new BoardPosition(0,2), symbolX);
+
+        assertThat(message, is(Message.X_WINS));
     }
 
     @Test
     public void
-    have_a_game_board_which_has_9_squares() {
+    return_X_wins_for_three_X_in_a_row() {
+
         TicTacToe ticTacToe = new TicTacToe();
-        assertThat(ticTacToe.boardSize(), is(9));
+        BoardSymbol symbolX = new BoardSymbol("X");
+        BoardSymbol symbolO = new BoardSymbol("O");
+
+        ticTacToe.move(new BoardPosition(0,0), symbolX);
+        ticTacToe.move(new BoardPosition(1,1), symbolO);
+        ticTacToe.move(new BoardPosition(0,1), symbolX);
+        ticTacToe.move(new BoardPosition(2,1), symbolO);
+        Message message = ticTacToe.move(new BoardPosition(0,2), symbolX);
+
+        assertThat(message, is(Message.X_WINS));
     }
 
     @Test
     public void
-    have_as_a_first_move_an_X() {
+    return_O_wins_for_three_O_in_a_row() {
 
         TicTacToe ticTacToe = new TicTacToe();
-        assertThat(ticTacToe.game("X"), is("X"));
+        BoardSymbol symbolX = new BoardSymbol("X");
+        BoardSymbol symbolO = new BoardSymbol("O");
+
+        ticTacToe.move(new BoardPosition(1,0), symbolX);
+        ticTacToe.move(new BoardPosition(0,0), symbolO);
+        ticTacToe.move(new BoardPosition(2,2), symbolX);
+        ticTacToe.move(new BoardPosition(0,1), symbolO);
+        Message message = ticTacToe.move(new BoardPosition(0,2), symbolO);
+
+        assertThat(message, is(Message.O_WINS));
     }
+
+
 }

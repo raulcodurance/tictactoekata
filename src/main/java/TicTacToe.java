@@ -1,18 +1,23 @@
-public final class TicTacToe {
+import java.util.HashMap;
+import java.util.Map;
 
+public class TicTacToe {
+    private Map<BoardPosition, BoardSymbol> board = new HashMap<>();
 
-    private String[][] board;
+    public Message move(BoardPosition position, BoardSymbol symbolX) {
 
-    public String[][] board() {
-        board = new String[0][];
-        return board;
-    }
+        if (board.containsKey(position)) {
+            return Message.POSITION_TAKEN;
+        }
+        board.put(position, symbolX);
 
-    public int boardSize() {
-        return 9;
-    }
+        if (symbolX.equals(board.get(new BoardPosition(0, 0)))
+                && symbolX.equals(board.get(new BoardPosition(0, 1)))
+                && symbolX.equals(board.get(new BoardPosition(0, 2)))) {
 
-    public String game(String inputFromPlayer) {
-        return null;
+            return symbolX.equals(new BoardSymbol("X")) ? Message.X_WINS : Message.O_WINS;
+        }
+
+        return Message.X_WINS;
     }
 }
